@@ -128,7 +128,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         
     }
     public static void addAutomovil(){
-        String placa,modelo="",marca,tipoV,tipocomb,tipotrans;
+        String placa,modelo,marca,tipoV="",tipocomb,tipotrans;
         int asientos,ano,puertas ;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
@@ -138,174 +138,8 @@ static ArrayList<Vehiculo> lista=new ArrayList();
             System.out.println("Ingrese una placa valida");
             placa=sc.nextLine();
         }
-        System.out.println("Ingrese una marca: ");
-        marca=sc.nextLine();
-        System.out.println("""
-                           Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
-                           """);
-        
-        String Tipos = sc.nextLine();
-        while (num(Tipos)) {
-            System.out.println("""
-                               Solo debe ingresar numeros
-                           Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
-                           """);
-            Tipos = sc.nextLine();
-        }
-        int Tip = 0;
-        Tip = Integer.parseInt(Tipos);
-        while (Tip < 1 || Tip > 3) {
-            System.out.println("""
-                               Ingrese una opcion valida
-                           Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
-                           """);
-            Tipos = sc.nextLine();
-            while (num(Tipos)) {
-                System.out.println("""
-                           Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
-                           """);
-                Tipos = sc.nextLine();
-            }
-            Tip = 0;
-            Tip = Integer.parseInt(Tipos);
-        }
-        switch(Tip){
-            case 1:{
-                modelo="Turismo";
-            }
-            break;
-            case 2:{
-                modelo="Camioneta";
-            }
-            break;
-            case 3:{
-                modelo="Otro";
-            }
-            break;
-        }
-        color=JColorChooser.showDialog(null, 
-                "Ingrese el color del Vehiculo", Color.WHITE);
-        System.out.println("Ingrese el año del vehiculo: ");
-        ano=sc.nextInt();
-        sc=new Scanner(System.in);
-        System.out.println("Ingrese el tipo de combustible del Automovil: ");
-        tipocomb=sc.nextLine();
-        System.out.println("Ingrese el numero de puertas: ");
-        puertas=scs.nextInt();
-        System.out.println("Ingrese el tipo de transmision del Automovil: ");
-        tipotrans=sc.nextLine();
-        System.out.println("Ingrese el numero de asientos del automovil: ");
-        asientos=scs.nextInt();
-        
-        Date año=new Date();
-        año.setYear(ano);
-        lista.add(new Automovil(tipocomb, tipotrans, puertas, asientos, placa, marca, modelo, Tipos, color,año ));
-        JOptionPane.showMessageDialog(null, "El vehiculo se ha agregado exitosamente");
-         
-    }
-    public static void addMoto(){
-        String placa,modelo="",marca,tipoV,tipocomb;
-        int asientos,ano;
-        double vel,peso,consum;
-        Color color;
-        System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaMoto(placa)){
-            System.out.println("Ingrese una placa valida");
-            placa=sc.nextLine();
-        }
-        System.out.println("Ingrese una marca: ");
-        marca=sc.nextLine();
-        System.out.println("""
-                           Seleccione el tipo:
-                           1.- Normal
-                           2.- Cuatrimoto
-                           """);
-        
-        String Tipos = sc.nextLine();
-        while (num(Tipos)) {
-            System.out.println("""
-                               Solo debe ingresar numeros
-                           Seleccione el tipo:
-                           1.- Normal
-                           2.- Cuatrimoto
-                           """);
-            Tipos = sc.nextLine();
-        }
-        int Tip = 0;
-        Tip = Integer.parseInt(Tipos);
-        while (Tip < 1 || Tip > 2) {
-            System.out.println("""
-                               Ingrese una opcion valida
-                           Seleccione el tipo:
-                           1.- Normal
-                           2.- Cuatrimoto
-                           """);
-            Tipos = sc.nextLine();
-            while (num(Tipos)) {
-                System.out.println("""
-                           Seleccione el tipo:
-                           1.- Normal
-                           2.- Cuatrimoto
-                           """);
-                Tipos = sc.nextLine();
-            }
-            Tip = 0;
-            Tip = Integer.parseInt(Tipos);
-        }
-        switch(Tip){
-            case 1:{
-                modelo="Clasica";
-            }
-            break;
-            case 2:{
-                modelo="Cuatrimoto";
-            }
-            
-            break;
-        }
-        color=JColorChooser.showDialog(null, 
-                "Ingrese el color del Vehiculo", Color.WHITE);
-        System.out.println("Ingrese el año del vehiculo: ");
-        ano=scs.nextInt();
-        Date año=new Date();
-        año.setYear(ano);
-        System.out.println("Ingrese la velocidad Maxima de la Motocicleta: ");
-        vel=scs.nextDouble();
-        System.out.println("Ingrese el peso de la Motocicleta: ");
-        peso=scs.nextDouble();
-        System.out.println("Ingrese el consumo de la motocicleta (L/Km):");
-        consum=scs.nextDouble();
-        lista.add(new Motocicleta(vel, peso, consum, placa, marca, modelo, Tipos, color, año));
-        JOptionPane.showMessageDialog(null, "Moto agregada con exito");
-        
-        
-         
-    }
-    public static void addAutobus(){
-        String placa,modelo,marca,tipoV,tipocomb,tipotrans;
-        int asientos,ano;
-        Color color;
-        System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaAuto(placa)){
-            System.out.println("Ingrese una placa valida");
-            placa=sc.nextLine();
-        }
+        System.out.println("Ingrese el modelo: ");
+        modelo=sc.nextLine();
         System.out.println("Ingrese una marca: ");
         marca=sc.nextLine();
         System.out.println("""
@@ -367,6 +201,207 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
         ano=sc.nextInt();
+        sc=new Scanner(System.in);
+        System.out.println("Ingrese el tipo de combustible del Automovil: ");
+        tipocomb=sc.nextLine();
+        System.out.println("Ingrese el numero de puertas: ");
+        puertas=scs.nextInt();
+        System.out.println("Ingrese el tipo de transmision del Automovil: ");
+        tipotrans=sc.nextLine();
+        System.out.println("Ingrese el numero de asientos del automovil: ");
+        asientos=scs.nextInt();
+        
+        Date año=new Date();
+        año.setYear(ano);
+        lista.add(new Automovil(tipocomb, tipotrans, puertas, asientos, placa, marca, modelo, tipoV, color,año ));
+        JOptionPane.showMessageDialog(null, "El vehiculo se ha agregado exitosamente");
+         
+    }
+    public static void addMoto(){
+        String placa,modelo="",marca,tipoV="";
+        int asientos,ano;
+        double vel,peso,consum;
+        Color color;
+        System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
+        System.out.println("Ingrese la Placa: ");
+        placa=sc.nextLine();
+        while(verifPlacaMoto(placa)){
+            System.out.println("Ingrese una placa valida");
+            placa=sc.nextLine();
+        }
+        System.out.println("Ingrese el modelo: ");
+        modelo=sc.nextLine();
+        System.out.println("Ingrese una marca: ");
+        marca=sc.nextLine();
+        System.out.println("""
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Cuatrimoto
+                           """);
+        
+        String Tipos = sc.nextLine();
+        while (num(Tipos)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Cuatrimoto
+                           """);
+            Tipos = sc.nextLine();
+        }
+        int Tip = 0;
+        Tip = Integer.parseInt(Tipos);
+        while (Tip < 1 || Tip > 2) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Cuatrimoto
+                           """);
+            Tipos = sc.nextLine();
+            while (num(Tipos)) {
+                System.out.println("""
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Cuatrimoto
+                           """);
+                Tipos = sc.nextLine();
+            }
+            Tip = 0;
+            Tip = Integer.parseInt(Tipos);
+        }
+        switch(Tip){
+            case 1:{
+                tipoV="Clasica";
+            }
+            break;
+            case 2:{
+                tipoV="Cuatrimoto";
+            }
+            
+            break;
+        }
+        color=JColorChooser.showDialog(null, 
+                "Ingrese el color del Vehiculo", Color.WHITE);
+        System.out.println("Ingrese el año del vehiculo: ");
+        ano=scs.nextInt();
+        Date año=new Date();
+        año.setYear(ano);
+        System.out.println("Ingrese la velocidad Maxima de la Motocicleta: ");
+        vel=scs.nextDouble();
+        while(vel<1){
+            System.out.println("Ingrese una velocidad valida");
+            System.out.println("Ingrese la velocidad Maxima de la Motocicleta: ");
+            vel=scs.nextDouble();  
+        }
+        System.out.println("Ingrese el peso de la Motocicleta: ");
+        peso=scs.nextDouble();
+        while(peso<1){
+            System.out.println("Ingrese un peso valido");
+            System.out.println("Ingrese el peso de la Motocicleta: ");
+            peso=scs.nextDouble();  
+        }
+        System.out.println("Ingrese el consumo de la motocicleta (L/Km):");
+        consum=scs.nextDouble();
+        while(consum<1){
+            System.out.println("Ingrese un consumo valido");
+            System.out.println("Ingrese el consumo de la Motocicleta: ");
+            consum=scs.nextDouble();  
+        }
+        lista.add(new Motocicleta(vel, peso, consum, placa, marca, modelo, tipoV, color, año));
+        JOptionPane.showMessageDialog(null, "Moto agregada con exito");
+        
+        
+         
+    }
+    public static void addAutobus(){
+        String placa,modelo="",marca,tipoV="",tipocomb;
+        int asientos,ano,pasajero,eje;
+        double longitud;
+        Color color;
+        System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
+        System.out.println("Ingrese la Placa: ");
+        placa=sc.nextLine();
+        while(verifPlacaAuto(placa)){
+            System.out.println("Ingrese una placa valida");
+            placa=sc.nextLine();
+        }
+        System.out.println("Ingrese una marca: ");
+        marca=sc.nextLine();
+        System.out.println("""
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Rapidito
+                           3.- Otro
+                           """);
+        
+        String Tipos = sc.nextLine();
+        while (num(Tipos)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Rapidito
+                           3.- Otro
+                           """);
+            Tipos = sc.nextLine();
+        }
+        int Tip = 0;
+        Tip = Integer.parseInt(Tipos);
+        while (Tip < 1 || Tip > 3) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Rapidito
+                           3.- Otro
+                           """);
+            Tipos = sc.nextLine();
+            while (num(Tipos)) {
+                System.out.println("""
+                           Seleccione el tipo:
+                           1.- Normal
+                           2.- Rapidito
+                           3.- Otro
+                           """);
+                Tipos = sc.nextLine();
+            }
+            Tip = 0;
+            Tip = Integer.parseInt(Tipos);
+        }
+        switch(Tip){
+            case 1:{
+                tipoV="Normal";
+            }
+            break;
+            case 2:{
+                tipoV="Rapidito";
+            }
+            break;
+            case 3:{
+                tipoV="Otro";
+            }
+            break;
+        }
+        color=JColorChooser.showDialog(null, 
+                "Ingrese el color del Vehiculo", Color.WHITE);
+        System.out.println("Ingrese el año del vehiculo: ");
+        ano=sc.nextInt();
+        Date año=new Date();
+        año.setYear(ano);
+        while(ano<0){
+            System.out.println("Ingrese una cantidad valida");
+            ano=scs.nextInt();
+        }
+        System.out.println("Ingrese la cantidad de pasajeros del bus: ");
+        pasajero=scs.nextInt();
+        System.out.println("Ingrese el numero de ejes del bus: ");
+        eje=scs.nextInt();
+        System.out.println("Ingrese la longitud del autobus: ");
+        longitud=scs.nextDouble();
+        lista.add(new Autobus(pasajero, eje, longitud, placa, marca, modelo, tipoV, color, año));
+        JOptionPane.showMessageDialog(null, "Se ha agregado el bus a la lista");
+        
         
         
          
