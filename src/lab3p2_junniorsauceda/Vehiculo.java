@@ -75,6 +75,11 @@ public class Vehiculo {
     public void setAño(Date año) {
         this.ano = año;
     }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" + "placa=" + placa + ", marca=" + marca + ", modelo=" + modelo + ", tipo=" + tipo + ", color=" + color + ", ano=" + ano.getYear() + '}';
+    }
     
     
 }
