@@ -94,11 +94,11 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 }
                 break;
                 case 2:{
-
+                    addMoto();
                 }
                 break;
                 case 3:{
-
+                    addAutobus();
                 }
                 break;
                 case 4:{
@@ -216,13 +216,14 @@ static ArrayList<Vehiculo> lista=new ArrayList();
          
     }
     public static void addMoto(){
-        String placa,modelo,marca,tipoV,tipocomb,tipotrans;
+        String placa,modelo="",marca,tipoV,tipocomb;
         int asientos,ano;
+        double vel,peso,consum;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
         System.out.println("Ingrese la Placa: ");
         placa=sc.nextLine();
-        while(verifPlacaAuto(placa)){
+        while(verifPlacaMoto(placa)){
             System.out.println("Ingrese una placa valida");
             placa=sc.nextLine();
         }
@@ -230,9 +231,8 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         marca=sc.nextLine();
         System.out.println("""
                            Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
+                           1.- Normal
+                           2.- Cuatrimoto
                            """);
         
         String Tipos = sc.nextLine();
@@ -240,29 +240,26 @@ static ArrayList<Vehiculo> lista=new ArrayList();
             System.out.println("""
                                Solo debe ingresar numeros
                            Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
+                           1.- Normal
+                           2.- Cuatrimoto
                            """);
             Tipos = sc.nextLine();
         }
         int Tip = 0;
         Tip = Integer.parseInt(Tipos);
-        while (Tip < 1 || Tip > 3) {
+        while (Tip < 1 || Tip > 2) {
             System.out.println("""
                                Ingrese una opcion valida
                            Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
+                           1.- Normal
+                           2.- Cuatrimoto
                            """);
             Tipos = sc.nextLine();
             while (num(Tipos)) {
                 System.out.println("""
                            Seleccione el tipo:
-                           1.- Turismo
-                           2.- Camioneta
-                           3.- Otro
+                           1.- Normal
+                           2.- Cuatrimoto
                            """);
                 Tipos = sc.nextLine();
             }
@@ -271,22 +268,29 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         }
         switch(Tip){
             case 1:{
-                tipoV="Turismo";
+                modelo="Clasica";
             }
             break;
             case 2:{
-                tipoV="Camioneta";
+                modelo="Cuatrimoto";
             }
-            break;
-            case 3:{
-                tipoV="Otro";
-            }
+            
             break;
         }
         color=JColorChooser.showDialog(null, 
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
-        ano=sc.nextInt();
+        ano=scs.nextInt();
+        Date año=new Date();
+        año.setYear(ano);
+        System.out.println("Ingrese la velocidad Maxima de la Motocicleta: ");
+        vel=scs.nextDouble();
+        System.out.println("Ingrese el peso de la Motocicleta: ");
+        peso=scs.nextDouble();
+        System.out.println("Ingrese el consumo de la motocicleta (L/Km):");
+        consum=scs.nextDouble();
+        lista.add(new Motocicleta(vel, peso, consum, placa, marca, modelo, Tipos, color, año));
+        JOptionPane.showMessageDialog(null, "Moto agregada con exito");
         
         
          
