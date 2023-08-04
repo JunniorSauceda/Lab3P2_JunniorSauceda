@@ -138,12 +138,14 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                         for (Vehiculo vehiculo : lista) {
                             System.out.println((lista.indexOf(vehiculo)+1)+".- "+vehiculo.getClass()+" "+vehiculo);
                         }
-                        System.out.println("Ingrese el indice del vehiculo que desea modificar: ");
+                        System.out.println("Ingrese el indice del vehiculo que desea eliminar: ");
                         int indice=scs.nextInt();
                         while(indice<1||indice>lista.size()){
                             System.out.println("Ingrese un indice valido: ");
                              indice=scs.nextInt();
                         }
+                        lista.remove(indice-1);
+                        JOptionPane.showMessageDialog(null, "Se ha modificado el vehiculo");
                     }
                 }
                 break;
