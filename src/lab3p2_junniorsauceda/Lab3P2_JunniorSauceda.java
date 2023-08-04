@@ -205,10 +205,37 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 break;
                 case 7:{
                     if(lista.isEmpty()){
-                        
+                        System.out.println("No hay vehiculos");
                     }
                     else{
-                        
+                        for (Vehiculo vehiculo : lista) {
+                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo);
+                        }
+                        System.out.println("Ingrese el indice del vehiculo que al que desea ponerle una boleta ");
+                        int indice=scs.nextInt();
+                        while(indice<1||indice>lista.size()){
+                            System.out.println("Ingrese un indice valido: ");
+                             indice=scs.nextInt();
+                        }
+                        System.out.println("");
+                        System.out.println("BOLETA DE REVISION VEHICULAR");
+                        System.out.println("Placa: "+lista.get(indice-1).getPlaca());
+                        System.out.println("Marca: "+lista.get(indice-1).getMarca());
+                        System.out.println("Modelo: "+lista.get(indice-1).getModelo());
+                        System.out.println("Tipo: "+lista.get(indice-1).getTipo());
+                        System.out.println("Color: "+lista.get(indice-1).getColor());
+                        System.out.println("Año: "+lista.get(indice-1).getAño().getYear());
+                        double paga=525;
+                        if(lista.get(indice-1) instanceof Automovil){
+                            paga+=1200;
+                        }
+                        else if(lista.get(indice-1) instanceof Autobus){
+                            paga+=1000;
+                        }
+                        else if(lista.get(indice-1) instanceof Motocicleta){
+                            paga+=200;
+                        }
+                        System.out.println("El total de su Boleta es: "+paga);
                     }
                 }
                 break;
@@ -754,7 +781,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         color=JColorChooser.showDialog(null, 
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
-        ano=sc.nextInt();
+        ano=scs.nextInt();
         Date año=new Date();
         año.setYear(ano);
         while(ano<0){
