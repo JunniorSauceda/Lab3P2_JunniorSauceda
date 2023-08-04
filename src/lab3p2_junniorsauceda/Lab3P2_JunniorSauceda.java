@@ -136,7 +136,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                     }
                     else{
                         for (Vehiculo vehiculo : lista) {
-                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+vehiculo.getClass()+" "+vehiculo);
+                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo);
                         }
                         System.out.println("Ingrese el indice del vehiculo que desea eliminar: ");
                         int indice=scs.nextInt();
@@ -145,16 +145,61 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                              indice=scs.nextInt();
                         }
                         lista.remove(indice-1);
-                        JOptionPane.showMessageDialog(null, "Se ha modificado el vehiculo");
+                        JOptionPane.showMessageDialog(null, "Se ha ELIMINADO el vehiculo");
                     }
                 }
                 break;
                 case 6:{
                     if(lista.isEmpty()){
-                        
+                        System.out.println("No hay vehiculos para enlistar");
                     }
                     else{
+                        int A=0,M=0,B=0;
+                        for (Vehiculo vehiculo : lista) {
+                            if(vehiculo instanceof Automovil){
+                                A++;
+                            }
+                            if(vehiculo instanceof Motocicleta){
+                                M++;
+                            }
+                            if(vehiculo instanceof Autobus){
+                                B++;
+                            }
+                            
+                        }
+                        System.out.println("LISTA TOTAL DE VEHICULOS");
                         
+                        int cont=1;
+                        System.out.println("El total de vehiculos es: "+A);
+                        System.out.println("");
+                        System.out.println("Automoviles:");
+                        for (Vehiculo vehiculo : lista) {
+                            if(vehiculo instanceof Automovil){
+                                System.out.println((cont)+".- "+" "+vehiculo);
+                                cont++;
+                            }
+                        }
+                        cont=1;
+                        System.out.println("El total de motocicletas es: "+M);
+                        System.out.println("");
+                        System.out.println("Motocicletas");
+                        for (Vehiculo vehiculo : lista) {
+                            if(vehiculo instanceof Motocicleta){
+                                System.out.println((cont)+".- "+" "+vehiculo);
+                                cont++;
+                            }
+                        }
+                        cont=1;
+                        System.out.println("");
+                        System.out.println("El total de autobuses es: "+B);
+                        System.out.println("");
+                        System.out.println("Autobuses");
+                        for (Vehiculo vehiculo : lista) {
+                            if(vehiculo instanceof Autobus){
+                                System.out.println((cont)+".- "+" "+vehiculo);
+                                cont++;
+                            }
+                        }
                     }
                 }
                 break;
