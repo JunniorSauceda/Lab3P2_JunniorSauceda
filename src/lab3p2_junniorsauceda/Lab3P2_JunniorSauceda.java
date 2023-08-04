@@ -107,7 +107,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                     }
                     else{
                         for (Vehiculo vehiculo : lista) {
-                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo);
+                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                         }
                         System.out.println("Ingrese el indice del vehiculo que desea modificar: ");
                         int indice=scs.nextInt();
@@ -136,7 +136,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                     }
                     else{
                         for (Vehiculo vehiculo : lista) {
-                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo);
+                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                         }
                         System.out.println("Ingrese el indice del vehiculo que desea eliminar: ");
                         int indice=scs.nextInt();
@@ -175,7 +175,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                         System.out.println("Automoviles:");
                         for (Vehiculo vehiculo : lista) {
                             if(vehiculo instanceof Automovil){
-                                System.out.println((cont)+".- "+" "+vehiculo);
+                                System.out.println((cont)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                                 cont++;
                             }
                         }
@@ -185,7 +185,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                         System.out.println("Motocicletas");
                         for (Vehiculo vehiculo : lista) {
                             if(vehiculo instanceof Motocicleta){
-                                System.out.println((cont)+".- "+" "+vehiculo);
+                                System.out.println((cont)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                                 cont++;
                             }
                         }
@@ -196,7 +196,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                         System.out.println("Autobuses");
                         for (Vehiculo vehiculo : lista) {
                             if(vehiculo instanceof Autobus){
-                                System.out.println((cont)+".- "+" "+vehiculo);
+                                System.out.println((cont)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                                 cont++;
                             }
                         }
@@ -209,7 +209,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                     }
                     else{
                         for (Vehiculo vehiculo : lista) {
-                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo);
+                            System.out.println((lista.indexOf(vehiculo)+1)+".- "+" "+vehiculo.getClass().getSimpleName()+" "+vehiculo);
                         }
                         System.out.println("Ingrese el indice del vehiculo que al que desea ponerle una boleta ");
                         int indice=scs.nextInt();
@@ -250,16 +250,22 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         
     }
     public static Automovil modAutomovil(){
-        String placa,modelo,marca,tipoV="",tipocomb,tipotrans;
+        String placa,modelo,marca,tipoV="",tipocomb="",tipotrans="";
         int asientos,ano,puertas ;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaAuto(placa)){
-            System.out.println("Ingrese una placa valida");
+        do{
+            System.out.println("Ingrese la Placa: ");
             placa=sc.nextLine();
-        }
+            while(verifPlacaAuto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
         System.out.println("Ingrese el modelo: ");
         modelo=sc.nextLine();
         System.out.println("Ingrese una marca: ");
@@ -324,14 +330,126 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         System.out.println("Ingrese el año del vehiculo: ");
         ano=sc.nextInt();
         sc=new Scanner(System.in);
-        System.out.println("Ingrese el tipo de combustible del Automovil: ");
-        tipocomb=sc.nextLine();
+        System.out.println("""
+                           Seleccione el tipo de combustible:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+        
+        String Comb = sc.nextLine();
+        while (num(Comb)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+            Comb = sc.nextLine();
+        }
+        int gaso = 0;
+        gaso = Integer.parseInt(Comb);
+        while (gaso < 1 || gaso > 3) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+            Comb = sc.nextLine();
+            while (num(Comb)) {
+                System.out.println("""
+                           Seleccione el tipo de combustible:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+                Comb = sc.nextLine();
+            }
+            gaso = 0;
+            gaso = Integer.parseInt(Comb);
+        }
+        switch(gaso){
+            case 1:{
+                tipocomb="Diesel";
+            }
+            break;
+            case 2:{
+                tipocomb="Super";
+            }
+            break;
+            case 3:{
+                tipocomb="Regular";
+            }
+            break;
+        }
         System.out.println("Ingrese el numero de puertas: ");
         puertas=scs.nextInt();
-        System.out.println("Ingrese el tipo de transmision del Automovil: ");
-        tipotrans=sc.nextLine();
+        while(puertas<0){
+           System.out.println("Ingrese un numero valido: ");
+            puertas=scs.nextInt(); 
+        }
+        System.out.println("""
+                           Seleccione el tipo de transmision del vehiculo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+        
+        String T = sc.nextLine();
+        while (num(T)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+            T = sc.nextLine();
+        }
+        int tranformer = 0;
+        tranformer = Integer.parseInt(T);
+        while (tranformer < 1 || tranformer > 2) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo de transmision:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+            T = sc.nextLine();
+            while (num(T)) {
+                System.out.println("""
+                           Seleccione el tipo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+                T = sc.nextLine();
+            }
+            tranformer = 0;
+            tranformer = Integer.parseInt(T);
+        }
+        switch(tranformer){
+            case 1:{
+                tipotrans="Automatico";
+            }
+            break;
+            case 2:{
+                tipotrans="Mecanico";
+            }
+            break;
+            case 3:{
+                tipotrans="Regular";
+            }
+            break;
+        }
+        
+        
         System.out.println("Ingrese el numero de asientos del automovil: ");
         asientos=scs.nextInt();
+        while(asientos<1){
+           System.out.println("Ingrese un numero valido: ");
+            asientos=scs.nextInt(); 
+        }
         
         Date año=new Date();
         año.setYear(ano);
@@ -345,12 +463,18 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         double vel,peso,consum;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaMoto(placa)){
-            System.out.println("Ingrese una placa valida");
+        do{
+            System.out.println("Ingrese la Placa: ");
             placa=sc.nextLine();
-        }
+            while(verifPlacaMoto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
         System.out.println("Ingrese el modelo: ");
         modelo=sc.nextLine();
         System.out.println("Ingrese una marca: ");
@@ -359,6 +483,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                           3.- Otro
                            """);
         
         String Tipos = sc.nextLine();
@@ -368,17 +493,19 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                               3.- Otro
                            """);
             Tipos = sc.nextLine();
         }
         int Tip = 0;
         Tip = Integer.parseInt(Tipos);
-        while (Tip < 1 || Tip > 2) {
+        while (Tip < 1 || Tip > 3) {
             System.out.println("""
                                Ingrese una opcion valida
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                               3.- Otro
                            """);
             Tipos = sc.nextLine();
             while (num(Tipos)) {
@@ -386,6 +513,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                                   3.- Otro
                            """);
                 Tipos = sc.nextLine();
             }
@@ -400,7 +528,10 @@ static ArrayList<Vehiculo> lista=new ArrayList();
             case 2:{
                 tipoV="Cuatrimoto";
             }
-            
+            break;
+            case 3:{
+                tipoV="Otro";
+            }
             break;
         }
         color=JColorChooser.showDialog(null, 
@@ -439,12 +570,18 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         double longitud;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaAuto(placa)){
-            System.out.println("Ingrese una placa valida");
+        do{
+            System.out.println("Ingrese la Placa: ");
             placa=sc.nextLine();
-        }
+            while(verifPlacaAuto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
         System.out.println("Ingrese una marca: ");
         marca=sc.nextLine();
         System.out.println("""
@@ -505,30 +642,53 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         color=JColorChooser.showDialog(null, 
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
-        ano=sc.nextInt();
-        Date año=new Date();
-        año.setYear(ano);
-        while(ano<0){
-            System.out.println("Ingrese una cantidad valida");
+        ano=scs.nextInt();
+        while(ano<1){
+            System.out.println("Ingrese un año valido: ");
             ano=scs.nextInt();
         }
+        Date año=new Date();
+        año.setYear(ano);
+        
         System.out.println("Ingrese la cantidad de pasajeros del bus: ");
         pasajero=scs.nextInt();
+        while(pasajero<1){
+           System.out.println("Ingrese una cantidad valida: ");
+            pasajero=scs.nextInt(); 
+        }
         System.out.println("Ingrese el numero de ejes del bus: ");
         eje=scs.nextInt();
+        while(eje<1){
+           System.out.println("Ingrese una cantidad valida");
+            eje=scs.nextInt(); 
+        }
         System.out.println("Ingrese la longitud del autobus: ");
         longitud=scs.nextDouble();
+        while(longitud<1){
+           System.out.println("Ingrese una longitud valida: ");
+            longitud=scs.nextDouble(); 
+        }
         Autobus bus=(new Autobus(pasajero, eje, longitud, placa, marca, modelo, tipoV, color, año));
         return bus;
     }
     
     public static void addAutomovil(){
-        String placa,modelo,marca,tipoV="",tipocomb,tipotrans;
+        String placa,modelo,marca,tipoV="",tipocomb="",tipotrans="";
         int asientos,ano,puertas ;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
+        do{
+            System.out.println("Ingrese la Placa: ");
+            placa=sc.nextLine();
+            while(verifPlacaAuto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
         while(verifPlacaAuto(placa)){
             System.out.println("Ingrese una placa valida");
             placa=sc.nextLine();
@@ -596,15 +756,131 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
         ano=sc.nextInt();
+        while(ano<1){
+          System.out.println("Ingrese un numero valido: ");
+          ano=sc.nextInt();  
+        }
         sc=new Scanner(System.in);
-        System.out.println("Ingrese el tipo de combustible del Automovil: ");
-        tipocomb=sc.nextLine();
+        System.out.println("""
+                           Seleccione el tipo de combustible:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+        
+        String Comb = sc.nextLine();
+        while (num(Comb)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+            Comb = sc.nextLine();
+        }
+        int gaso = 0;
+        gaso = Integer.parseInt(Comb);
+        while (gaso < 1 || gaso > 3) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+            Comb = sc.nextLine();
+            while (num(Comb)) {
+                System.out.println("""
+                           Seleccione el tipo de combustible:
+                           1.- Diesel
+                           2.- Super
+                           3.- Regular
+                           """);
+                Comb = sc.nextLine();
+            }
+            gaso = 0;
+            gaso = Integer.parseInt(Comb);
+        }
+        switch(gaso){
+            case 1:{
+                tipocomb="Diesel";
+            }
+            break;
+            case 2:{
+                tipocomb="Super";
+            }
+            break;
+            case 3:{
+                tipocomb="Regular";
+            }
+            break;
+        }
         System.out.println("Ingrese el numero de puertas: ");
         puertas=scs.nextInt();
-        System.out.println("Ingrese el tipo de transmision del Automovil: ");
-        tipotrans=sc.nextLine();
+        while(puertas<1){
+            System.out.println("Ingrese un numero valido: ");
+            puertas=scs.nextInt();
+        }
+        System.out.println("""
+                           Seleccione el tipo de transmision del vehiculo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+        
+        String T = sc.nextLine();
+        while (num(T)) {
+            System.out.println("""
+                               Solo debe ingresar numeros
+                           Seleccione el tipo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+            T = sc.nextLine();
+        }
+        int tranformer = 0;
+        tranformer = Integer.parseInt(T);
+        while (tranformer < 1 || tranformer > 2) {
+            System.out.println("""
+                               Ingrese una opcion valida
+                           Seleccione el tipo de transmision:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+            T = sc.nextLine();
+            while (num(T)) {
+                System.out.println("""
+                           Seleccione el tipo:
+                           1.- Automatico
+                           2.- Mecanico
+                           """);
+                T = sc.nextLine();
+            }
+            tranformer = 0;
+            tranformer = Integer.parseInt(T);
+        }
+        switch(tranformer){
+            case 1:{
+                tipotrans="Automatico";
+            }
+            break;
+            case 2:{
+                tipotrans="Mecanico";
+            }
+            break;
+            case 3:{
+                tipotrans="Regular";
+            }
+            break;
+        }
+        
+        
         System.out.println("Ingrese el numero de asientos del automovil: ");
         asientos=scs.nextInt();
+        while(asientos<1){
+            System.out.println("Ingrese un numero valido: ");
+            asientos=scs.nextInt();
+        }
         
         Date año=new Date();
         año.setYear(ano);
@@ -618,12 +894,19 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         double vel,peso,consum;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaMoto(placa)){
-            System.out.println("Ingrese una placa valida");
+        do{
+            System.out.println("Ingrese la Placa: ");
             placa=sc.nextLine();
-        }
+            while(verifPlacaMoto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
+        
         System.out.println("Ingrese el modelo: ");
         modelo=sc.nextLine();
         System.out.println("Ingrese una marca: ");
@@ -641,17 +924,19 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                           3.- Otro
                            """);
             Tipos = sc.nextLine();
         }
         int Tip = 0;
         Tip = Integer.parseInt(Tipos);
-        while (Tip < 1 || Tip > 2) {
+        while (Tip < 1 || Tip > 3) {
             System.out.println("""
                                Ingrese una opcion valida
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                           3.- Otro
                            """);
             Tipos = sc.nextLine();
             while (num(Tipos)) {
@@ -659,6 +944,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                            Seleccione el tipo:
                            1.- Normal
                            2.- Cuatrimoto
+                           3.- Otro
                            """);
                 Tipos = sc.nextLine();
             }
@@ -673,7 +959,10 @@ static ArrayList<Vehiculo> lista=new ArrayList();
             case 2:{
                 tipoV="Cuatrimoto";
             }
-            
+            break;
+            case 3:{
+                tipoV="Otro";
+            }
             break;
         }
         color=JColorChooser.showDialog(null, 
@@ -715,14 +1004,22 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         double longitud;
         Color color;
         System.out.println("A continuacion agregara un vehiculo, Porfavor ingrese los siguientes datos:");
-        System.out.println("Ingrese la Placa: ");
-        placa=sc.nextLine();
-        while(verifPlacaAuto(placa)){
-            System.out.println("Ingrese una placa valida");
+        do{
+            System.out.println("Ingrese la Placa: ");
             placa=sc.nextLine();
-        }
+            while(verifPlacaAuto(placa)){
+                System.out.println("Ingrese una placa valida");
+                placa=sc.nextLine();
+            }
+            if(verifPlacas(placa)){
+                System.out.println("La placa ingresada ya esta ingresada");
+            }
+            
+        }while(verifPlacas(placa));
         System.out.println("Ingrese una marca: ");
         marca=sc.nextLine();
+        System.out.println("Ingrese el modelo: ");
+        modelo=sc.nextLine();
         System.out.println("""
                            Seleccione el tipo:
                            1.- Normal
@@ -782,18 +1079,31 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 "Ingrese el color del Vehiculo", Color.WHITE);
         System.out.println("Ingrese el año del vehiculo: ");
         ano=scs.nextInt();
-        Date año=new Date();
-        año.setYear(ano);
-        while(ano<0){
-            System.out.println("Ingrese una cantidad valida");
+        while(ano<1){
+            System.out.println("Ingrese un año valido: ");
             ano=scs.nextInt();
         }
+        Date año=new Date();
+        año.setYear(ano);
+        
         System.out.println("Ingrese la cantidad de pasajeros del bus: ");
         pasajero=scs.nextInt();
+        while(pasajero<1){
+           System.out.println("Ingrese una cantidad valida: ");
+            pasajero=scs.nextInt(); 
+        }
         System.out.println("Ingrese el numero de ejes del bus: ");
         eje=scs.nextInt();
+        while(eje<1){
+           System.out.println("Ingrese una cantidad valida");
+            eje=scs.nextInt(); 
+        }
         System.out.println("Ingrese la longitud del autobus: ");
         longitud=scs.nextDouble();
+        while(longitud<1){
+           System.out.println("Ingrese una longitud valida: ");
+            longitud=scs.nextDouble(); 
+        }
         lista.add(new Autobus(pasajero, eje, longitud, placa, marca, modelo, tipoV, color, año));
         JOptionPane.showMessageDialog(null, "Se ha agregado el bus a la lista");
         
@@ -801,7 +1111,19 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         
          
     }
-    
+    public static boolean verifPlacas(String placa){
+        boolean plac=false;
+        int cont=0;
+        for (Vehiculo vehiculo : lista) {
+            if(vehiculo.getPlaca().equals(placa)){
+                cont++;
+            }
+        }
+        if(cont>0){
+            plac=true;
+        }
+        return plac;
+    }
     public static boolean verifPlacaAuto(String placa){
         boolean val=false;
         int mal=0;
@@ -872,8 +1194,6 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         }
         return val;
     }
-    
-    
     public static boolean num(String Num) {
         boolean valido = false;
         int cha = 0;
