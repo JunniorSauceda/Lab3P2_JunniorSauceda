@@ -26,6 +26,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
         // TODO code application logic here
         boolean seguir=true;
         do{
+            
             System.out.println("""
                                           MENU
                                1.- Agregar Automovil
@@ -118,6 +119,7 @@ static ArrayList<Vehiculo> lista=new ArrayList();
                 break;
                 case 8:{
                     seguir=false;
+                    System.out.println("Hasta luego");
                 }
                 break;
             }
